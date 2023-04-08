@@ -1,11 +1,17 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_ui_responsive/config/palette.dart';
 
 class ProfileAvater extends StatelessWidget {
   final String imagUrl;
   final bool isActive;
-  const ProfileAvater(
-      {super.key, required this.imagUrl, this.isActive = false});
+  final bool hasBorder;
+  const ProfileAvater({
+    super.key,
+    required this.imagUrl,
+    this.isActive = false,
+    this.hasBorder = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,8 +19,12 @@ class ProfileAvater extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 20.0,
-          backgroundColor: Colors.grey[200],
-          // backgroundImage: CachedNetworkImageProvider(imagUrl),
+          backgroundColor: Palette.facebookBlue,
+          child: CircleAvatar(
+            radius: hasBorder ? 18.0 : 20.0,
+            backgroundColor: Colors.grey[200],
+            backgroundImage: CachedNetworkImageProvider(imagUrl),
+          ),
         ),
         isActive
             ? Positioned(
