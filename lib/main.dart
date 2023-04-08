@@ -13,7 +13,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Facebook UI',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        // primarySwatch: Colors.blue,
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: OutlinedButton.styleFrom(
+            primary: Palette.facebookBlue,
+          ),
+        ),
         scaffoldBackgroundColor: Palette.scaffold,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),

@@ -38,6 +38,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   cached_network_image: 
   material_design_icons_flutter: 
+  extended_image:
 
 
 dev_dependencies:
