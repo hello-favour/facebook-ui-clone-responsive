@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_ui_responsive/config/palette.dart';
@@ -44,6 +46,19 @@ class ProfileAvater extends StatelessWidget {
                 ),
               )
             : const SizedBox.shrink(),
+        ShaderMask(
+          shaderCallback: (Rect bounds) {
+            return const RadialGradient(
+              center: Alignment.topCenter,
+              radius: 4.0,
+              colors: [
+                Colors.white,
+              ],
+              tileMode: TileMode.mirror,
+            ).createShader(bounds);
+          },
+          child: const Text("data"),
+        ),
       ],
     );
   }
