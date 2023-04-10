@@ -117,48 +117,57 @@ class _HomeScreenDesktop extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Flexible(
+        const Flexible(
           flex: 2,
-          child: Container(
-            child: CustomScrollView(
-              controller: scrollController,
-              slivers: [
-                SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
-                  sliver: SliverToBoxAdapter(
-                    child: Stories(currentUser: currentUser, stories: stories),
-                  ),
-                ),
-                const SliverToBoxAdapter(
-                  child: CreatePostContainer(currentUser: currentUser),
-                ),
-                const SliverPadding(
-                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.5),
-                  sliver: SliverToBoxAdapter(
-                    child: Rooms(onlineUsers: onlineUsers),
-                  ),
-                ),
-                SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) {
-                      final Post post = posts[index];
-                      return PostContainer(post: post);
-                    },
-                    childCount: posts.length,
-                  ),
-                ),
-              ],
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: MoreOptionList(currentUser: currentUser),
             ),
           ),
         ),
         Container(
-          color: Colors.red,
           width: 600.0,
+          child: CustomScrollView(
+            controller: scrollController,
+            slivers: [
+              SliverPadding(
+                padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
+                sliver: SliverToBoxAdapter(
+                  child: Stories(currentUser: currentUser, stories: stories),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: CreatePostContainer(currentUser: currentUser),
+              ),
+              const SliverPadding(
+                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.5),
+                sliver: SliverToBoxAdapter(
+                  child: Rooms(onlineUsers: onlineUsers),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildBuilderDelegate(
+                  (context, index) {
+                    final Post post = posts[index];
+                    return PostContainer(post: post);
+                  },
+                  childCount: posts.length,
+                ),
+              ),
+            ],
+          ),
         ),
-        Flexible(
+        const Spacer(),
+        const Flexible(
           flex: 2,
-          child: Container(
-            color: Colors.blue,
+          child: Align(
+            alignment: Alignment.centerRight,
+            child: Padding(
+              padding: EdgeInsets.all(12.0),
+              child: ContactList(users: onlineUsers),
+            ),
           ),
         ),
       ],
