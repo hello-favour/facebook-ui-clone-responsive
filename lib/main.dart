@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_ui_responsive/config/palette.dart';
-import 'package:flutter_facebook_ui_responsive/screens/home_screen.dart';
 import 'package:flutter_facebook_ui_responsive/screens/screens.dart';
 
 void main() {

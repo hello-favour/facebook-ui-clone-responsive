@@ -46,19 +46,19 @@ class ProfileAvater extends StatelessWidget {
                 ),
               )
             : const SizedBox.shrink(),
-        ShaderMask(
-          shaderCallback: (Rect bounds) {
-            return const RadialGradient(
-              center: Alignment.topCenter,
-              radius: 4.0,
-              colors: [
-                Colors.white,
-              ],
-              tileMode: TileMode.mirror,
-            ).createShader(bounds);
-          },
-          child: const Text("data"),
-        ),
+        // ShaderMask(
+        //   shaderCallback: (Rect bounds) {
+        //     return const RadialGradient(
+        //       center: Alignment.topCenter,
+        //       radius: 4.0,
+        //       colors: [
+        //         Colors.white,
+        //       ],
+        //       tileMode: TileMode.mirror,
+        //     ).createShader(bounds);
+        //   },
+        //   child: const Text("data"),
+        // ),
       ],
     );
   }

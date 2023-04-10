@@ -51,19 +51,19 @@ class _CreateRoomButton extends StatelessWidget {
         primary: Palette.facebookBlue,
       ),
       child: Row(
-        children: [
-          ShaderMask(
-            shaderCallback: (rect) {
-              return Palette.createRoomGradient.createShader(rect);
-            },
-            child: const Icon(
-              Icons.video_call,
-              size: 35.0,
-              color: Colors.white,
-            ),
+        children: const [
+          // ShaderMask(
+          //   shaderCallback: (rect) {
+          //     return Palette.createRoomGradient.createShader(rect);
+          //   },
+          Icon(
+            Icons.video_call,
+            size: 35.0,
+            color: Colors.purple,
           ),
-          const SizedBox(width: 4.0),
-          const Text("Create\nRoom"),
+
+          SizedBox(width: 4.0),
+          Text("Create\nRoom"),
         ],
       ),
     );
