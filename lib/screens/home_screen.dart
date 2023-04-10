@@ -5,8 +5,22 @@ import 'package:flutter_facebook_ui_responsive/models/models.dart';
 import 'package:flutter_facebook_ui_responsive/widgets/widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final TrackingScrollController _trackingScrollController =
+      TrackingScrollController();
+
+  @override
+  void dispose() {
+    _trackingScrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,8 +30,10 @@ class HomeScreen extends StatelessWidget {
       },
       child: Scaffold(
         body: Responsive(
-          mobile: _HomeScreenMobile(),
-          desktop: _HomeScreenDesktop(),
+          mobile:
+              _HomeScreenMobile(scrollController: _trackingScrollController),
+          desktop:
+              _HomeScreenDesktop(scrollController: _trackingScrollController),
           tablet: SizedBox.shrink(),
         ),
       ),
@@ -26,11 +42,13 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _HomeScreenMobile extends StatelessWidget {
-  const _HomeScreenMobile({super.key});
+  final TrackingScrollController scrollController;
+  const _HomeScreenMobile({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(
+      controller: scrollController,
       slivers: [
         SliverAppBar(
           backgroundColor: Colors.white,
@@ -92,7 +110,8 @@ class _HomeScreenMobile extends StatelessWidget {
 }
 
 class _HomeScreenDesktop extends StatelessWidget {
-  const _HomeScreenDesktop({super.key});
+  final TrackingScrollController scrollController;
+  const _HomeScreenDesktop({super.key, required this.scrollController});
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +120,35 @@ class _HomeScreenDesktop extends StatelessWidget {
         Flexible(
           flex: 2,
           child: Container(
-            color: Colors.orange,
+            child: CustomScrollView(
+              controller: scrollController,
+              slivers: [
+                SliverPadding(
+                  padding: const EdgeInsets.fromLTRB(0.0, 20.0, 0.0, 10.0),
+                  sliver: SliverToBoxAdapter(
+                    child: Stories(currentUser: currentUser, stories: stories),
+                  ),
+                ),
+                const SliverToBoxAdapter(
+                  child: CreatePostContainer(currentUser: currentUser),
+                ),
+                const SliverPadding(
+                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 0.5),
+                  sliver: SliverToBoxAdapter(
+                    child: Rooms(onlineUsers: onlineUsers),
+                  ),
+                ),
+                SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                    (context, index) {
+                      final Post post = posts[index];
+                      return PostContainer(post: post);
+                    },
+                    childCount: posts.length,
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
         Container(

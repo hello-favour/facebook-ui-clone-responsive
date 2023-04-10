@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_ui_responsive/models/user_model.dart';
 import 'package:flutter_facebook_ui_responsive/widgets/profile_avater.dart';
+import 'package:flutter_facebook_ui_responsive/widgets/widgets.dart';
 
 class CreatePostContainer extends StatelessWidget {
   final User currentUser;
@@ -8,74 +9,82 @@ class CreatePostContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
-      color: Colors.white,
-      child: Column(
-        children: [
-          Row(
-            children: [
-              ProfileAvater(imagUrl: currentUser.imageUrl),
-              const SizedBox(width: 8.0),
-              const Expanded(
-                child: TextField(
-                  decoration: InputDecoration.collapsed(
-                      hintText: "What's on your mind?"),
-                ),
-              ),
-            ],
-          ),
-          const Divider(height: 10.0, thickness: 0.5),
-          Container(
-            height: 40.0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    final bool isDesktop = Responsive.isDestop(context);
+    return Card(
+      margin: EdgeInsets.symmetric(horizontal: isDesktop ? 5.0 : 0.0),
+      elevation: isDesktop ? 5.0 : 0.0,
+      shape: isDesktop
+          ? RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))
+          : null,
+      child: Container(
+        padding: const EdgeInsets.fromLTRB(12.0, 8.0, 12.0, 0.0),
+        color: Colors.white,
+        child: Column(
+          children: [
+            Row(
               children: [
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.videocam,
-                    color: Colors.red,
-                  ),
-                  label: const Text(
-                    "Live",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                const VerticalDivider(width: 0.8),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.photo_library,
-                    color: Colors.green,
-                  ),
-                  label: const Text(
-                    "Photo",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                const VerticalDivider(width: 0.8),
-                TextButton.icon(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.video_call,
-                    color: Colors.purple,
-                  ),
-                  label: const Text(
-                    "Room",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
+                ProfileAvater(imagUrl: currentUser.imageUrl),
+                const SizedBox(width: 8.0),
+                const Expanded(
+                  child: TextField(
+                    decoration: InputDecoration.collapsed(
+                        hintText: "What's on your mind?"),
                   ),
                 ),
               ],
             ),
-          ),
-        ],
+            const Divider(height: 10.0, thickness: 0.5),
+            Container(
+              height: 40.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.videocam,
+                      color: Colors.red,
+                    ),
+                    label: const Text(
+                      "Live",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const VerticalDivider(width: 0.8),
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.photo_library,
+                      color: Colors.green,
+                    ),
+                    label: const Text(
+                      "Photo",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                  const VerticalDivider(width: 0.8),
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.video_call,
+                      color: Colors.purple,
+                    ),
+                    label: const Text(
+                      "Room",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
